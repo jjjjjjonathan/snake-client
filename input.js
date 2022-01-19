@@ -1,4 +1,4 @@
-const { stdin } = require('process');
+const { connect } = require("http2");
 
 let connection;
 const setupInput = conn => {
@@ -11,27 +11,23 @@ const setupInput = conn => {
   return stdin;
 };
 
-const handleUserInput = () => {
-  stdin.on('data', key => {
-    if (key === "w") {
-
-        connection.write('Move: up');
-
-    };
-    if (key === "a") {
-        connection.write('Move: left');
-    }
-    if (key === "s") {
-        connection.write('Move: down');
-    }
-    if (key === "d") {
-        connection.write('Move: right');
-    }
-    if (key === '\u0003') {
-      console.log("thanks for playing");
-      process.exit();
-    }
-  })
+const handleUserInput = key => {
+  if (key === "w") {
+    connection.write('Move: up');
+  } else if (key === "a") {
+    connection.write('Move: left');
+  } else if (key === "s") {
+    connection.write('Move: down');
+  } else if (key === "d") {
+    connection.write('Move: right');
+  } else if (key === '\u0003') {
+    console.log("thanks for playing");
+    process.exit();
+  } else if (key === '1') {
+    connection.write('Say: You snooze you lose!');
+  } else if (key === '2') {
+    connection.write('Say: I was so close!');
+  }
 };
 
 module.exports = { setupInput }
