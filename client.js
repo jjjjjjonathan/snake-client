@@ -1,4 +1,7 @@
 const net = require("net");
+const { stdin } = require("process");
+// const { setupInput } = require('./play');
+
 const connect = function() {
   const conn = net.createConnection({
     host: 'localhost',// IP address here,
@@ -22,5 +25,14 @@ const connect = function() {
 
   return conn;
 };
+
+// const handleUserInput = () => {
+//   stdin.on('data', key => {
+//     if (key === '\u0003') {
+//       console.log("thanks for playing");
+//       process.exit();
+//     }
+//   })
+// };
 
 module.exports = { connect };
